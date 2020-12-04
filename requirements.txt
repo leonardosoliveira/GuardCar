@@ -13,7 +13,6 @@ GitPython==2.1.11
 gunicorn==20.0.4
 keyring==17.1.1
 keyrings.alt==3.1.1
-onboard==1.4.1
 pexpect==4.6.0
 Pillow==5.4.1
 psycopg2==2.8.6
