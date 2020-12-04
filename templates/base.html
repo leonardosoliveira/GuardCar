@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    {% block style %} {% endblock %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="GuardCar" content="">
+    <meta name="Leonardo Oliveira" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>{% block titulo %}{% endblock titulo %}</title>
+    <link href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/fontawesome.min.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'nav/slicknav/jquery.slicknav.min.js' %}"></script>
+
+
+    {% block scripts %}{% endblock scripts %}
+
+    <style>.centered {
+        margin: 0 auto !important;
+        float: none !important;
+    }
+    @media (max-width: 800px){
+    .wrap{
+        margin: 100px 0 0 0 !important;
+        padding: 30px 0 0 0;
+        }
+    }
+    .page-wrap{
+        padding: 60px 0 0 0 !important;
+    }
+    </style>
+    <style>
+    
+    </style>
+</head>
+<body class="fix-sidebar">
+    {% include "navbar.html" %}
+
+  
+<div id="wrapper" class="page-wrap">
+ 
+    {% block content_fora %}
+    {% endblock content_fora %}
+    <div id="page-wrapper" class="wrap" >
+        <div class="container-fluid">
+            <div class="row">
+                {% block content %}
+                {% endblock content %}
+                {% block extra_body %}
+                {% endblock %}
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </div>
+</div>
+
+{% include "scripts.html" %}
+{% block scripts_footer %}
+{% endblock scripts_footer %}
+</body>
+</html>

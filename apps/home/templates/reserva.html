@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1 class="text-center"> Detalhes do Estacionamento</h1>
+
+<div class="container mp-4 mb-4">
+    <div class="row">
+        <div class="col-sm-4">
+            <div style="border-color: #6610f2; border-style: solid; width: 356px; height: 300px;">
+                <img src="{{estacionamentos.foto.url}}" width="350" height="263" style="margin-top: 16px">
+            </div>
+
+        </div>
+        <div class="col-sm-8">
+            <p>{{estacionamentos.nome}}</p>
+            <p><b>Endereço: </b> {{estacionamentos.endereco}} </p>
+            <p><b>Contato: </b> {{ estacionamentos.telefone}}</p>
+            <p><b>Vagas Disponiveis: </b> {{ estacionamentos.vagas}}</p>
+            <p><b>Valor:</b> {{ estacionamentos.valor}} </p>
+
+            <a href="../../agendamento/{{estacionamentos.id}}/" class="btn btn-primary"> 
+            Reservar
+            </a>
+            <button type="button" class="btn btn-danger">Cancelar</button>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

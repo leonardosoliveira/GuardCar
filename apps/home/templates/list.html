@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+    .polaroid{
+        width: 250px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2) ;
+        text-align: center;
+    }
+    .container{
+        padding: 10px;
+    }
+
+</style>
+{% endblock %}
+
+{% block content_fora %}
+
+    <div class="container mb-4"> 
+        
+        <div class="row">
+            {%for e in estacionamentos %}
+            <div class="col-sm-4">
+                <a href="../detalhes/{{ e.id }}">
+                <div class="polaroid">
+                    <img src="{{ e.foto.url}}" style="width: 100%">
+                    <div class="container">
+                        <p>{{e.nome}}</p>
+                        <p>{{e.endereco}}</p>
+                        <p><b>Vagas: </b>{{e.vagas}}</p>
+                        <p><b>Valor: </b>{{e.valor}} </p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {%endfor%}
+
+        </div>
+
+
+    </div>
+
+    
+
+{% endblock content_fora %}
+{% block extra_body %}
+{% endblock %}
+{% block scripts_footer %}
+<!-- Scripts -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/skel.min.js' %}"></script>
+<script src="{% static 'assets/js/util.js' %}"></script>
+<!--[if lte IE 8]><script src="{% static 'assets/js/ie/respond.min.js' %}"></script><![endif]-->
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+{% endblock scripts_footer %}
