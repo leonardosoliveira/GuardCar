@@ -20,7 +20,7 @@
     <div class="container mb-4"> 
         
         <div class="row">
-            {%for e in estacionamentos %}
+            {% for e in estacionamentos %}
             <div class="col-sm-4">
                 <a href="../detalhes/{{ e.id }}">
                 <div class="polaroid">
@@ -29,7 +29,7 @@
                         <p>{{e.nome}}</p>
                         <p>{{e.endereco}}</p>
                         <p><b>Vagas: </b>{{e.vagas}}</p>
-                        <p><b>Valor: </b>{{e.valor}} </p>
+                        <p><b>Valor: </b> 15,00 Reais </p>
                     </div>
                 </div>
                 </a>

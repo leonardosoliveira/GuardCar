@@ -3,31 +3,22 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class UserForm(UserCreationForm):
-    first_name = forms.CharField(max_length=50)
 
     class Meta:
+        fields = ('username','email','first_name','password1','password2')
         model = User
-        fields = ["first_name", "email", "username"]
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
+            
+        }
 
-       
-    def _init_(self, *args, **kwargs):
-        super(UserForm, self)._init_(*args, **kwargs)
-        self.fields['first_name'].widget.attrs['placeholder'] = 'Nome...'
-        self.fields['email'].widget.attrs['placeholder'] = 'Email...'
-        self.fields['username'].widget.attrs['placeholder'] = 'Nome de Usuario...'
-        self.fields['username'].widget.attrs['autocomplete'] = ''
-        self.fields['password1'].widget.attrs['placeholder'] = 'Senha...'
-        self.fields['password2'].widget.attrs['placeholder'] = 'Repetir Senha...'
-
-        for fieldname in ['username', 'password1', 'password2', 'email', 'first_name']:
-            self.fields[fieldname].help_text = None
-            self.fields[fieldname].widget.attrs['class'] = 'form-control'
+    def _init_(self,args,*kwargs):
+        super()._init_(args,*kwargs)
+        self.fields['username'].label = 'Username'
+        self.fields['first_name'].label = 'Nome'
+        self.fields['email'].label = 'Email'
         
-    def save(self, commit=True):
-        user = super(UserForm, self).save(commit=False)
-        user.first_name = self.cleaned_data["first_name"]
-        user.email = self.cleaned_data["email"]
-        user.username= self.cleaned_data["username"]
-        if commit:
-            user.save()
-        return user

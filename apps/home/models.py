@@ -5,11 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Cliente(models.Model):
-    nome = models.CharField(max_length=50)
-    telefone = models.CharField(max_length=50)
-    email = models.EmailField()
-    endereco = models.CharField(max_length=100)
-    user = models.OneToOneField(User,unique=True,related_name="cliente",on_delete=models.PROTECT)
+    vagas = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 
@@ -20,10 +17,10 @@ class Estacionamentos(models.Model):
     telefone = models.CharField(max_length=11)
     Data_cadastro = models.DateTimeField(auto_now_add=True)
     vagas = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     foto = models.ImageField(upload_to='estacionamento')
     valor = models.FloatField(default=15.00)
+
 
 
     def __str__(self):
@@ -36,7 +33,7 @@ class Estacionamentos(models.Model):
 class Mapa(models.Model):
     latitude = models.CharField(max_length=100)
     longitude = models.CharField(max_length=100)
-    
+
 
     
 

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.shortcuts import redirect
 from .forms import UserForm
-from .models import Estacionamentos
+from .models import Estacionamentos, Cliente
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -27,7 +27,7 @@ def list_todas_reservas(request):
 
 @login_required
 def list_user_reservas(request):
-    estacionamentos = Estacionamentos.objects.filter(active=True, user=request.user)
+    estacionamentos = Cliente.objects.filter(user=request.user)
 
     return render(request, 'list.html', {'estacionamentos': estacionamentos})
 
@@ -43,25 +43,21 @@ def reserva_agendamento(request, id):
     if(estacionamentos.vagas > 0):
          estacionamentos.vagas -= 1
          estacionamentos.save()
+         cliente = Cliente()
+         cliente.vagas = 1
+         cliente.user_id = request.user.id
+         cliente.save()
     return render(request, 'pagamento.html')
         
 def cadastro_usuario(request):
-    print("teste\n\n")
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         usuarioDja = UserForm(request.POST)
-        print("teste2\n\n",usuarioDja)
-        user = User()
-        user.first_name= request.POST['first_name']
-        user.username = request.POST['username']
-        user.email = request.POST['email']
-        user.password1 = request.POST['password1']
-        user.password2 = request.POST['password2']
-        
-        user.save()
-        return render(request, 'login.html')
-    usuarioDja = UserForm()
+        if usuarioDja.is_valid():
+            usuarioDja.save()
+            return redirect('../account/login/')
+    else:
+        usuarioDja = UserForm()
     return render(request, 'cadastro.html', {"usuarioDja":usuarioDja})
-
 
 
 
